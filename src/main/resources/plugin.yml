@@ -1,0 +1,6 @@
+name: GoldmanPlayerData
+version: $version
+main: lee.code.playerdata.PlayerData
+description: $description
+author: Lee
+api-version: "$apiVersion"
