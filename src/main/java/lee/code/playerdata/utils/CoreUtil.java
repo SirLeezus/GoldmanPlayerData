@@ -2,6 +2,8 @@ package lee.code.playerdata.utils;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -11,7 +13,9 @@ import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class CoreUtil {
   public static String getPlayerSkin(Player player) {
@@ -41,5 +45,12 @@ public class CoreUtil {
     applyHeadSkin(headMeta, skin);
     head.setItemMeta(headMeta);
     return head;
+  }
+
+  public static List<String> getOnlinePlayers() {
+    return Bukkit.getOnlinePlayers().stream()
+      .filter(player -> !player.getGameMode().equals(GameMode.SPECTATOR))
+      .map(Player::getName)
+      .collect(Collectors.toList());
   }
 }
