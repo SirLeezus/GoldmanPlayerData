@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class CachePlayers extends DatabaseHandler {
   private final ConcurrentHashMap<UUID, PlayerTable> playersCache = new ConcurrentHashMap<>();
-  private final ConcurrentHashMap<String, UUID> nameCache = new ConcurrentHashMap<>();
 
   public CachePlayers(DatabaseManager databaseManager) {
     super(databaseManager);
@@ -23,7 +22,6 @@ public class CachePlayers extends DatabaseHandler {
 
   public void setPlayerTable(PlayerTable playerTable) {
     playersCache.put(playerTable.getUniqueId(), playerTable);
-    nameCache.put(playerTable.getName(), playerTable.getUniqueId());
   }
 
   public boolean hasPlayerData(UUID uuid) {
@@ -38,23 +36,12 @@ public class CachePlayers extends DatabaseHandler {
 
   public void updatePlayerData(Player player) {
     final PlayerTable playerTable = getPlayerTable(player.getUniqueId());
-    nameCache.remove(playerTable.getName());
-    playerTable.setName(player.getName());
     playerTable.setSkin(CoreUtil.getPlayerSkin(player));
     setPlayerTable(playerTable);
     updatePlayerDatabase(playerTable);
   }
 
-  public String getName(UUID uuid) {
-    return getPlayerTable(uuid).getName();
-  }
-
   public String getSkin(UUID uuid) {
     return getPlayerTable(uuid).getSkin();
-  }
-
-  public UUID getUniqueId(String name) {
-    if (!nameCache.containsKey(name)) return null;
-    return nameCache.get(name);
   }
 }

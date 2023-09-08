@@ -16,15 +16,11 @@ public class PlayerTable {
   @DatabaseField(id = true, canBeNull = false)
   private UUID uniqueId;
 
-  @DatabaseField(columnName = "name", canBeNull = false)
-  private String name;
-
   @DatabaseField(columnName = "skin", canBeNull = false)
   private String skin;
 
   public PlayerTable(UUID uniqueId, String name, String skin) {
     this.uniqueId = uniqueId;
-    this.name = name;
     this.skin = skin;
   }
 }
