@@ -5,7 +5,7 @@ import com.mojang.authlib.properties.Property;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R2.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -21,7 +21,7 @@ public class CoreUtil {
   public static String getPlayerSkin(Player player) {
     GameProfile profile = ((CraftPlayer) player).getProfile();
     Property property = profile.getProperties().get("textures").iterator().next();
-    return property.getValue();
+    return property.value();
   }
 
   public static void applyHeadSkin(ItemMeta itemMeta, String base64) {
