@@ -49,7 +49,6 @@ public class CoreUtil {
 
   public static List<String> getOnlinePlayers() {
     return Bukkit.getOnlinePlayers().stream()
-      .filter(player -> !player.getGameMode().equals(GameMode.SPECTATOR))
       .map(Player::getName)
       .collect(Collectors.toList());
   }

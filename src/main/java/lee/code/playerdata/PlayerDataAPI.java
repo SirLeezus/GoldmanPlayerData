@@ -16,6 +16,10 @@ public class PlayerDataAPI {
   }
 
   public static UUID getUniqueId(String name) {
+    if (CoreUtil.getOnlinePlayers().contains(name)) {
+      final Player target = Bukkit.getPlayer(name);
+      if (target != null) return target.getUniqueId();
+    }
     final OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(name);
     if (offlinePlayer == null || !offlinePlayer.hasPlayedBefore()) return null;
     else return offlinePlayer.getUniqueId();
